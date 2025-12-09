@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { Github, Linkedin, Mail, Phone, ArrowUp, Menu, X } from 'lucide-react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -27,8 +27,8 @@ const projects: Project[] = [
     tech: ['React', 'Node.js', 'MongoDB'],
     image:
       'https://images.unsplash.com/photo-1524178232363-9330dd6d150d?w=800&h=250&fit=crop',
-    live: 'https://your-school-app.netlify.app', // TODO: replace with real demo URL
-    code: 'https://github.com/youruser/school-app', // TODO: replace with real repo URL
+    live: 'https://your-school-app.netlify.app', // TODO: replace
+    code: 'https://github.com/youruser/school-app', // TODO: replace
     category: 'fullstack',
     snippet: `
 const markAttendance = async (studentId: string, status: 'present' | 'absent') => {
@@ -48,8 +48,8 @@ const markAttendance = async (studentId: string, status: 'present' | 'absent') =
     tech: ['React', 'Express', 'Stripe'],
     image:
       'https://images.unsplash.com/photo-1571877221981-f1fc14d758f7?w=800&h=250&fit=crop',
-    live: 'https://your-grocery-app.vercel.app', // TODO: replace with real demo URL
-    code: 'https://github.com/youruser/grocery-app', // TODO: replace with real repo URL
+    live: 'https://your-grocery-app.vercel.app', // TODO: replace
+    code: 'https://github.com/youruser/grocery-app', // TODO: replace
     category: 'fullstack',
     snippet: `
 app.post('/api/orders', async (req, res) => {
@@ -344,87 +344,82 @@ const App: React.FC = () => {
           </div>
 
           <div className="projects-grid">
-            <AnimatePresence mode="sync">
-              <>
-                {filteredProjects.map((project) => (
-                  <motion.div
-                    key={project.id}
-                    className="project-card"
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.4 }}
-                    whileHover={{ y: -20, scale: 1.02 }}
-                    onHoverStart={() => {
-                      setHovered(true);
-                      setIsOnProject(true);
-                    }}
-                    onHoverEnd={() => {
-                      setHovered(false);
-                      setIsOnProject(false);
-                    }}
-                  >
-                    <div className="project-image">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        loading="lazy"
-                      />
-                      <div className="project-overlay">
-                        <div className="project-links">
-                          <a
-                            href={project.live}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-primary"
-                          >
-                            Live Demo
-                          </a>
-                          <a
-                            href={project.code}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-outline"
-                          >
-                            View Code
-                          </a>
-                        </div>
-                      </div>
+            {filteredProjects.map((project) => (
+              <motion.div
+                key={project.id}
+                className="project-card"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                whileHover={{ y: -20, scale: 1.02 }}
+                onHoverStart={() => {
+                  setHovered(true);
+                  setIsOnProject(true);
+                }}
+                onHoverEnd={() => {
+                  setHovered(false);
+                  setIsOnProject(false);
+                }}
+              >
+                <div className="project-image">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    loading="lazy"
+                  />
+                  <div className="project-overlay">
+                    <div className="project-links">
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-primary"
+                      >
+                        Live Demo
+                      </a>
+                      <a
+                        href={project.code}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-outline"
+                      >
+                        View Code
+                      </a>
                     </div>
-                    <div className="project-info">
-                      <h3>{project.title}</h3>
-                      <p>{project.description}</p>
+                  </div>
+                </div>
+                <div className="project-info">
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
 
-                      {project.snippet && (
-                        <div className="code-snippet">
-                          <SyntaxHighlighter
-                            language="typescript"
-                            style={oneDark}
-                            showLineNumbers
-                            customStyle={{
-                              borderRadius: '12px',
-                              fontSize: '0.8rem',
-                              maxHeight: '220px',
-                              marginTop: '1rem',
-                            }}
-                          >
-                            {project.snippet}
-                          </SyntaxHighlighter>
-                        </div>
-                      )}
-
-                      <div className="project-tech">
-                        {project.tech.map((tech) => (
-                          <span key={tech} className="tech-tag">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
+                  {project.snippet && (
+                    <div className="code-snippet">
+                      <SyntaxHighlighter
+                        language="typescript"
+                        style={oneDark}
+                        showLineNumbers
+                        customStyle={{
+                          borderRadius: '12px',
+                          fontSize: '0.8rem',
+                          maxHeight: '220px',
+                          marginTop: '1rem',
+                        }}
+                      >
+                        {project.snippet}
+                      </SyntaxHighlighter>
                     </div>
-                  </motion.div>
-                ))}
-              </>
-            </AnimatePresence>
+                  )}
+
+                  <div className="project-tech">
+                    {project.tech.map((tech) => (
+                      <span key={tech} className="tech-tag">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -483,22 +478,20 @@ const App: React.FC = () => {
       </section>
 
       {/* Scroll Top */}
-      <AnimatePresence mode="sync">
-        {showScrollTop ? (
-          <motion.button
-            className="scroll-top"
-            onClick={() =>
-              window.scrollTo({ top: 0, behavior: 'smooth' })
-            }
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
-            whileHover={{ scale: 1.1 }}
-          >
-            <ArrowUp size={20} />
-          </motion.button>
-        ) : null}
-      </AnimatePresence>
+      {showScrollTop && (
+        <motion.button
+          className="scroll-top"
+          onClick={() =>
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3 }}
+          whileHover={{ scale: 1.1 }}
+        >
+          <ArrowUp size={20} />
+        </motion.button>
+      )}
     </div>
   );
 };
