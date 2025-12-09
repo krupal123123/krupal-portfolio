@@ -1,678 +1,506 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background: #0a0a0a;
-  color: white;
-  overflow-x: hidden;
-}
-
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-/* 🔥 CUSTOM CURSOR */
-.custom-cursor {
-  position: fixed !important;
-  width: 24px !important;
-  height: 24px !important;
-  border-radius: 50% !important;
-  pointer-events: none !important;
-  z-index: 99999 !important;
-  mix-blend-mode: difference;
-  will-change: transform;
-}
-
-/* 🔥 NAVBAR */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 10000;
-  padding: 1.2rem 0;
-  background: rgba(10, 10, 26, 0.8);
-  backdrop-filter: blur(20px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.nav-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-size: 2rem;
-  font-weight: 900;
-}
-
-.logo-gradient {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ef4444 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.nav-menu {
-  display: flex;
-  list-style: none;
-  gap: 3.5rem;
-  align-items: center;
-}
-
-.nav-link {
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  position: relative;
-  padding: 0.5rem 0;
-  transition: all 0.3s ease;
-  letter-spacing: 0.5px;
-}
-
-.nav-link.active,
-.nav-link:hover {
-  color: #fbbf24;
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #fbbf24, #f59e0b);
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 2px;
-}
-
-.nav-link:hover::after,
-.nav-link.active::after {
-  width: 100%;
-}
-
-.hamburger {
-  display: none;
-  cursor: pointer;
-  padding: 0.5rem;
-}
-
-/* 🔥 HERO */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 160px 2rem 100px;
-  background: 
-    radial-gradient(ellipse at top, rgba(251, 191, 36, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at bottom left, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-    linear-gradient(135deg, #0a0a1a 0%, #1a0a2a 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: 
-    radial-gradient(circle at 20% 80%, rgba(251, 191, 36, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
-  animation: float 20s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-20px) rotate(120deg); }
-  66% { transform: translateY(10px) rotate(240deg); }
-}
-
-.hero-content {
-  max-width: 900px;
-  position: relative;
-  z-index: 2;
-}
-
-.hero-title {
-  font-size: clamp(3.5rem, 8vw, 7rem);
-  font-weight: 900;
-  line-height: 0.9;
-  margin-bottom: 1.5rem;
-  letter-spacing: -2px;
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ef4444 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero-subtitle {
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  font-weight: 400;
-  margin-bottom: 1.5rem;
-  opacity: 0.95;
-  letter-spacing: -0.5px;
-}
-
-.hero-desc {
-  font-size: 1.4rem;
-  line-height: 1.8;
-  margin-bottom: 4rem;
-  opacity: 0.85;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.hero-buttons {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.btn {
-  padding: 18px 48px;
-  border-radius: 60px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  border: none;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  min-height: 64px;
-  letter-spacing: 0.5px;
-  backdrop-filter: blur(10px);
-}
-
-.btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.6s;
-}
-
-.btn:hover::before {
-  left: 100%;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  color: #000;
-  box-shadow: 0 20px 40px rgba(251, 191, 36, 0.4);
-  font-weight: 800;
-}
-
-.btn-primary:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 30px 60px rgba(251, 191, 36, 0.6);
-}
-
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.btn-secondary:hover {
-  background: rgba(251, 191, 36, 0.2);
-  border-color: #fbbf24;
-  color: #fbbf24;
-  transform: translateY(-4px);
-}
-
-.btn-outline {
-  background: transparent;
-  color: #fbbf24;
-  border: 2px solid #fbbf24;
-}
-
-.btn-outline:hover {
-  background: #fbbf24;
-  color: #000;
-  transform: translateY(-4px);
-}
-
-.btn.large {
-  padding: 20px 56px;
-  font-size: 1.15rem;
-}
-
-/* 🔥 SECTIONS */
-section {
-  padding: 140px 0;
-}
-
-.section-title {
-  font-size: clamp(3rem, 7vw, 5rem);
-  font-weight: 900;
-  text-align: center;
-  margin-bottom: 5rem;
-  letter-spacing: -1px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(226, 232, 240, 0.5) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* 🔥 ABOUT */
-.about {
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-  position: relative;
-}
-
-.about::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.5), transparent);
-}
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.about-text {
-  font-size: 1.25rem;
-}
-
-.about-para {
-  line-height: 1.85;
-  margin-bottom: 2rem;
-  opacity: 0.9;
-}
-
-.about-para:last-child {
-  margin-bottom: 0;
-}
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1.5rem;
-}
-
-.skill-tag {
-  padding: 16px 28px;
-  background: rgba(251, 191, 36, 0.08);
-  border: 1px solid rgba(251, 191, 36, 0.2);
-  border-radius: 50px;
-  text-align: center;
-  font-weight: 700;
-  color: #fbbf24;
-  font-size: 0.95rem;
-  letter-spacing: 0.5px;
-  backdrop-filter: blur(20px);
-  position: relative;
-  overflow: hidden;
-}
-
-.skill-tag::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.2), transparent);
-  transition: left 0.6s;
-}
-
-.skill-tag:hover::before {
-  left: 100%;
-}
-
-/* 🔥 PROJECTS */
-.projects {
-  background: #0a0a0a;
-}
-
-.filter-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 5rem;
-  flex-wrap: wrap;
-}
-
-.filter-btn {
-  padding: 16px 32px;
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.8);
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: pointer;
-  letter-spacing: 0.5px;
-  backdrop-filter: blur(20px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.filter-btn.active,
-.filter-btn:hover {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  color: #000;
-  border-color: #fbbf24;
-  transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(251, 191, 36, 0.4);
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-  gap: 2.5rem;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.project-card {
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 28px;
-  overflow: hidden;
-  backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
-  position: relative;
-}
-
-.project-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.5), transparent);
-  transform: scaleX(0);
-  transition: transform 0.5s ease;
-}
-
-.project-card:hover::before {
-  transform: scaleX(1);
-}
-
-.project-image {
-  position: relative;
-  height: 280px;
-  overflow: hidden;
-}
-
-.project-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.project-card:hover .project-image img {
-  transform: scale(1.15);
-}
-
-.project-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(10,10,26,0.95) 0%, rgba(251, 191, 36, 0.15) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.project-card:hover .project-overlay {
-  opacity: 1;
-}
-
-.project-links {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  padding: 2rem;
-}
-
-.project-info {
-  padding: 2.5rem;
-}
-
-.project-info h3 {
-  font-size: 1.6rem;
-  margin-bottom: 1rem;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  line-height: 1.2;
-}
-
-.project-info p {
-  color: rgba(255, 255, 255, 0.75);
-  line-height: 1.75;
-  margin-bottom: 2rem;
-  font-size: 1.05rem;
-}
-
-.project-tech {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.tech-tag {
-  padding: 6px 20px;
-  background: rgba(251, 191, 36, 0.15);
-  color: #fbbf24;
-  border-radius: 25px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-}
-
-/* 🔥 CONTACT */
-.contact {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
-}
-
-.contact-content {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.contact-lead {
-  font-size: 1.45rem;
-  margin-bottom: 4rem;
-  opacity: 0.9;
-  line-height: 1.7;
-}
-
-.social-links {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.social-link {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  padding: 2rem 2.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  text-decoration: none;
-  color: white;
-  font-weight: 600;
-  font-size: 1.1rem;
-  letter-spacing: 0.3px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(20px);
-  position: relative;
-  overflow: hidden;
-}
-
-.social-link::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.social-link:hover::before {
-  opacity: 1;
-}
-
-/* 🔥 SCROLL TOP */
-.scroll-top {
-  position: fixed;
-  bottom: 3rem;
-  right: 3rem;
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  border: none;
-  color: #000;
-  font-weight: 800;
-  font-size: 1.1rem;
-  cursor: pointer;
-  z-index: 1001;
-  box-shadow: 0 20px 50px rgba(251, 191, 36, 0.5);
-  transition: all 0.3s ease;
-}
-
-/* 🔥 MOBILE RESPONSIVE */
-@media (max-width: 1024px) {
-  .projects-grid {
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    gap: 2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .hamburger {
-    display: flex;
-  }
-  
-  .nav-menu {
-    display: none;
-  }
-  
-  .hero-buttons {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-  
-  .about-grid {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 3rem;
-  }
-  
-  .projects-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .social-links {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .filter-buttons {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .container {
-    padding: 0 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero {
-    padding: 140px 1rem 80px;
-  }
-  
-  .section-title {
-    font-size: 2.5rem;
-  }
-  
-  .btn {
-    padding: 16px 36px;
-    font-size: 1rem;
-  }
-}
-
-/* 🔥 MOBILE MENU OVERLAY */
-.mobile-menu-overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  max-width: 350px;
-  height: 100vh;
-  background: rgba(10, 10, 26, 0.98);
-  backdrop-filter: blur(30px);
-  z-index: 10001;
-  padding: 8rem 2.5rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-}
-
-.mobile-nav-link {
-  color: white;
-  text-decoration: none;
-  font-size: 1.6rem;
-  font-weight: 700;
-  padding: 1rem 0;
-  border-bottom: 1px solid rgba(251, 191, 36, 0.3);
-  opacity: 0.9;
-  transition: all 0.3s ease;
-}
-
-.mobile-nav-link:hover {
-  color: #fbbf24;
-  opacity: 1;
-}
+import React, { useEffect, useState, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { gsap } from 'gsap';
+import { Github, Linkedin, Mail, Phone, ArrowUp, Menu, X } from 'lucide-react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import './App.css';
+
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  tech: string[];
+  image: string;
+  live: string;
+  code: string;
+  category: 'fullstack' | 'frontend';
+  snippet: string;
+}
+
+const projects: Project[] = [
+  {
+    id: 1,
+    title: 'School Attendance System',
+    description:
+      'Full‑stack web app to manage student attendance with role‑based access for students, parents, and teachers.',
+    tech: ['React', 'Node.js', 'MongoDB'],
+    image:
+      'https://images.unsplash.com/photo-1524178232363-9330dd6d150d?w=800&h=250&fit=crop',
+    live: 'https://your-school-app.netlify.app', // TODO: replace with real demo URL
+    code: 'https://github.com/youruser/school-app', // TODO: replace with real repo URL
+    category: 'fullstack',
+    snippet: `
+const markAttendance = async (studentId: string, status: 'present' | 'absent') => {
+  await api.post('/attendance', {
+    studentId,
+    status,
+    date: new Date().toISOString()
+  });
+};
+    `.trim(),
+  },
+  {
+    id: 2,
+    title: 'Grocery E‑commerce Platform',
+    description:
+      'Online grocery platform for local stores with inventory management, order tracking, and payment integration.',
+    tech: ['React', 'Express', 'Stripe'],
+    image:
+      'https://images.unsplash.com/photo-1571877221981-f1fc14d758f7?w=800&h=250&fit=crop',
+    live: 'https://your-grocery-app.vercel.app', // TODO: replace with real demo URL
+    code: 'https://github.com/youruser/grocery-app', // TODO: replace with real repo URL
+    category: 'fullstack',
+    snippet: `
+app.post('/api/orders', async (req, res) => {
+  const { items, customer } = req.body;
+  const total = calculateTotal(items);
+  const order = await Order.create({ items, customer, total, status: 'PENDING' });
+  res.json(order);
+});
+    `.trim(),
+  },
+  {
+    id: 3,
+    title: 'Advanced Portfolio v2.0',
+    description:
+      'Personal portfolio with custom cursor, scroll animations, and responsive UI built using React, GSAP, and Framer Motion.',
+    tech: ['React', 'TypeScript', 'GSAP', 'Framer Motion'],
+    image:
+      'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=250&fit=crop',
+    live: '#',
+    code: '#',
+    category: 'frontend',
+    snippet: `
+const PortfolioHero = () => (
+  <motion.h1
+    className="hero-title"
+    initial={{ opacity: 0, y: 40 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+  >
+    Hi, I'm <span className="gradient-text">Krupal Battula</span>
+  </motion.h1>
+);
+    `.trim(),
+  },
+];
+
+const App: React.FC = () => {
+  const [cursor, setCursor] = useState({ x: 0, y: 0 });
+  const [hovered, setHovered] = useState(false);
+  const [activeFilter, setActiveFilter] =
+    useState<'all' | 'fullstack' | 'frontend'>('all');
+  const [filteredProjects, setFilteredProjects] =
+    useState<Project[]>(projects);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isOnProject, setIsOnProject] = useState(false);
+
+  // Custom Mouse Cursor
+  useEffect(() => {
+    const moveCursor = (e: MouseEvent) => {
+      setCursor({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', moveCursor);
+    return () => window.removeEventListener('mousemove', moveCursor);
+  }, []);
+
+  // GSAP Scroll Animations
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        '.hero-title',
+        { opacity: 0, y: 100 },
+        { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' },
+      );
+
+      gsap.fromTo(
+        '.project-card',
+        { opacity: 0, y: 60, scale: 0.9 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.projects-grid',
+            start: 'top 80%',
+          },
+        },
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  // Filter Projects
+  const filterProjects = useCallback(
+    (category: 'all' | 'fullstack' | 'frontend') => {
+      setActiveFilter(category);
+      const filtered =
+        category === 'all'
+          ? projects
+          : projects.filter((p) => p.category === category);
+      setFilteredProjects(filtered);
+    },
+    [],
+  );
+
+  // Scroll Top visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div className="App">
+      {/* Custom Cursor */}
+      <motion.div
+        className={`custom-cursor ${hovered ? 'hovered' : ''}`}
+        animate={{
+          x: cursor.x - 12,
+          y: cursor.y - 12,
+          scale: hovered ? (isOnProject ? 1.5 : 2.2) : 1,
+          background: hovered
+            ? 'rgba(251, 191, 36, 0.9)'
+            : 'rgba(251, 191, 36, 0.4)',
+        }}
+        transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+      />
+
+      {/* Navbar */}
+      <nav className="navbar">
+        <div className="nav-container">
+          <motion.div className="logo" whileHover={{ scale: 1.1 }}>
+            <span className="logo-gradient">Krupal Battula</span>
+          </motion.div>
+
+          <ul className="nav-menu">
+            {['home', 'about', 'projects', 'contact'].map((item) => (
+              <li key={item}>
+                <a href={`#${item}`} className="nav-link">
+                  {item.charAt(0).toUpperCase() + item.slice(1)}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <motion.div
+            className="hamburger"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </motion.div>
+        </div>
+      </nav>
+
+      {/* Hero */}
+      <section id="home" className="hero">
+        <div className="hero-content">
+          <motion.h1 className="hero-title">
+            Hi, I'm <span className="gradient-text">Krupal Battula</span>
+          </motion.h1>
+          <motion.h2
+            className="hero-subtitle"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            Fresher Software Developer | AI & Full‑Stack
+          </motion.h2>
+          <motion.p
+            className="hero-desc"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            Fresher software engineer skilled in AI, machine learning, Python,
+            modern frontend, SQL databases, and Java backend development.
+            Completed a 1‑year internship as an SDE at VMAX Software Sol India
+            Pvt Ltd, building real‑world applications and scalable web
+            solutions.
+          </motion.p>
+          <motion.div
+            className="hero-buttons"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+          >
+            <a href="#projects" className="btn btn-primary large">
+              View My Projects
+            </a>
+            <a href="#contact" className="btn btn-secondary large">
+              Contact Me
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* About */}
+      <section id="about" className="about">
+        <div className="container">
+          <motion.h2
+            className="section-title"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            About Me
+          </motion.h2>
+          <div className="about-grid">
+            <motion.div
+              className="about-text"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <p>
+                Fresher full‑stack and AI‑focused developer based in India.
+                Passionate about building clean, scalable web applications and
+                intelligent systems that solve real problems.
+              </p>
+              <p>
+                Completed a 1‑year internship as a Software Development Engineer
+                at VMAX Software Sol India Pvt Ltd, gaining hands‑on experience
+                in end‑to‑end feature development, debugging, and performance
+                optimization.
+              </p>
+              <p>
+                <strong>Skills:</strong> AI, Machine Learning, Python, Java,
+                React, TypeScript, HTML/CSS, REST APIs, SQL databases, basic
+                NoSQL, and backend development.
+              </p>
+            </motion.div>
+            <motion.div
+              className="skills-grid"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              {[
+                'AI & ML',
+                'Python',
+                'Java (Backend)',
+                'React & TypeScript',
+                'HTML / CSS',
+                'SQL Databases',
+                'REST APIs',
+                'Git & GitHub',
+              ].map((skill, i) => (
+                <motion.div
+                  key={skill}
+                  className="skill-tag"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  whileHover={{ scale: 1.1, y: -10 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {skill}
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section id="projects" className="projects">
+        <div className="container">
+          <motion.h2
+            className="section-title"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Featured Projects
+          </motion.h2>
+
+          <div className="filter-buttons">
+            {['all', 'fullstack', 'frontend'].map((filter) => (
+              <motion.button
+                key={filter}
+                className={`filter-btn ${
+                  activeFilter === filter ? 'active' : ''
+                }`}
+                onClick={() =>
+                  filterProjects(filter as 'all' | 'fullstack' | 'frontend')
+                }
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {filter === 'all'
+                  ? 'All Projects'
+                  : filter.charAt(0).toUpperCase() + filter.slice(1)}
+              </motion.button>
+            ))}
+          </div>
+
+          <div className="projects-grid">
+            <AnimatePresence mode="sync">
+              <>
+                {filteredProjects.map((project) => (
+                  <motion.div
+                    key={project.id}
+                    className="project-card"
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4 }}
+                    whileHover={{ y: -20, scale: 1.02 }}
+                    onHoverStart={() => {
+                      setHovered(true);
+                      setIsOnProject(true);
+                    }}
+                    onHoverEnd={() => {
+                      setHovered(false);
+                      setIsOnProject(false);
+                    }}
+                  >
+                    <div className="project-image">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        loading="lazy"
+                      />
+                      <div className="project-overlay">
+                        <div className="project-links">
+                          <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn btn-primary"
+                          >
+                            Live Demo
+                          </a>
+                          <a
+                            href={project.code}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn btn-outline"
+                          >
+                            View Code
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="project-info">
+                      <h3>{project.title}</h3>
+                      <p>{project.description}</p>
+
+                      {project.snippet && (
+                        <div className="code-snippet">
+                          <SyntaxHighlighter
+                            language="typescript"
+                            style={oneDark}
+                            showLineNumbers
+                            customStyle={{
+                              borderRadius: '12px',
+                              fontSize: '0.8rem',
+                              maxHeight: '220px',
+                              marginTop: '1rem',
+                            }}
+                          >
+                            {project.snippet}
+                          </SyntaxHighlighter>
+                        </div>
+                      )}
+
+                      <div className="project-tech">
+                        {project.tech.map((tech) => (
+                          <span key={tech} className="tech-tag">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </>
+            </AnimatePresence>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="contact">
+        <div className="container">
+          <motion.h2
+            className="section-title"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Get In Touch
+          </motion.h2>
+          <motion.div
+            className="contact-content"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <p>
+              Open to full‑time roles and internships in software development, AI, and
+              full‑stack web development. Feel free to reach out for collaboration or
+              opportunities.
+            </p>
+            <div className="social-links">
+              <a
+                href="https://github.com/krupal123123"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-link"
+              >
+                <Github size={24} /> GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/krupal-battula-55488a254"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-link"
+              >
+                <Linkedin size={24} /> LinkedIn
+              </a>
+              <a
+                href="mailto:bathulakrupal@gmail.com"
+                className="social-link"
+              >
+                <Mail size={24} /> Email
+              </a>
+              <a href="tel:+91-your-number" className="social-link">
+                <Phone size={24} /> WhatsApp
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Scroll Top */}
+      <AnimatePresence mode="sync">
+        {showScrollTop ? (
+          <motion.button
+            className="scroll-top"
+            onClick={() =>
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            whileHover={{ scale: 1.1 }}
+          >
+            <ArrowUp size={20} />
+          </motion.button>
+        ) : null}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+export default App;
