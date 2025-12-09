@@ -14,7 +14,7 @@ interface Project {
   image: string;
   live: string;
   code: string;
-  category: string;
+  category: 'fullstack' | 'frontend';
   snippet: string;
 }
 
@@ -27,8 +27,8 @@ const projects: Project[] = [
     tech: ['React', 'Node.js', 'MongoDB'],
     image:
       'https://images.unsplash.com/photo-1524178232363-9330dd6d150d?w=800&h=250&fit=crop',
-    live: 'https://your-school-app.netlify.app', // TODO: replace with real URL
-    code: 'https://github.com/youruser/school-app', // TODO: replace with real repo
+    live: 'https://your-school-app.netlify.app', // TODO: replace with real demo URL
+    code: 'https://github.com/youruser/school-app', // TODO: replace with real repo URL
     category: 'fullstack',
     snippet: `
 const markAttendance = async (studentId: string, status: 'present' | 'absent') => {
@@ -48,8 +48,8 @@ const markAttendance = async (studentId: string, status: 'present' | 'absent') =
     tech: ['React', 'Express', 'Stripe'],
     image:
       'https://images.unsplash.com/photo-1571877221981-f1fc14d758f7?w=800&h=250&fit=crop',
-    live: 'https://your-grocery-app.vercel.app', // TODO: replace with real URL
-    code: 'https://github.com/youruser/grocery-app', // TODO: replace with real repo
+    live: 'https://your-grocery-app.vercel.app', // TODO: replace with real demo URL
+    code: 'https://github.com/youruser/grocery-app', // TODO: replace with real repo URL
     category: 'fullstack',
     snippet: `
 app.post('/api/orders', async (req, res) => {
@@ -89,8 +89,10 @@ const PortfolioHero = () => (
 const App: React.FC = () => {
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
   const [hovered, setHovered] = useState(false);
-  const [activeFilter, setActiveFilter] = useState<'all' | 'fullstack' | 'frontend'>('all');
-  const [filteredProjects, setFilteredProjects] = useState<Project[]>(projects);
+  const [activeFilter, setActiveFilter] =
+    useState<'all' | 'fullstack' | 'frontend'>('all');
+  const [filteredProjects, setFilteredProjects] =
+    useState<Project[]>(projects);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isOnProject, setIsOnProject] = useState(false);
@@ -135,12 +137,17 @@ const App: React.FC = () => {
   }, []);
 
   // Filter Projects
-  const filterProjects = useCallback((category: 'all' | 'fullstack' | 'frontend') => {
-    setActiveFilter(category);
-    const filtered =
-      category === 'all' ? projects : projects.filter((p) => p.category === category);
-    setFilteredProjects(filtered);
-  }, []);
+  const filterProjects = useCallback(
+    (category: 'all' | 'fullstack' | 'frontend') => {
+      setActiveFilter(category);
+      const filtered =
+        category === 'all'
+          ? projects
+          : projects.filter((p) => p.category === category);
+      setFilteredProjects(filtered);
+    },
+    [],
+  );
 
   // Scroll Top visibility
   useEffect(() => {
@@ -214,9 +221,10 @@ const App: React.FC = () => {
             transition={{ delay: 0.6 }}
           >
             Fresher software engineer skilled in AI, machine learning, Python,
-            modern frontend, SQL databases, and Java backend development. Completed a
-            1‑year internship as an SDE at VMAX Software Sol India Pvt Ltd, building
-            real‑world applications and scalable web solutions.
+            modern frontend, SQL databases, and Java backend development.
+            Completed a 1‑year internship as an SDE at VMAX Software Sol India
+            Pvt Ltd, building real‑world applications and scalable web
+            solutions.
           </motion.p>
           <motion.div
             className="hero-buttons"
@@ -253,20 +261,20 @@ const App: React.FC = () => {
               viewport={{ once: true }}
             >
               <p>
-                Fresher full‑stack and AI‑focused developer based in India. Passionate
-                about building clean, scalable web applications and intelligent systems
-                that solve real problems.
+                Fresher full‑stack and AI‑focused developer based in India.
+                Passionate about building clean, scalable web applications and
+                intelligent systems that solve real problems.
               </p>
               <p>
-                Completed a 1‑year internship as a Software Development Engineer at
-                VMAX Software Sol India Pvt Ltd, gaining hands‑on experience in
-                end‑to‑end feature development, debugging, and performance
+                Completed a 1‑year internship as a Software Development Engineer
+                at VMAX Software Sol India Pvt Ltd, gaining hands‑on experience
+                in end‑to‑end feature development, debugging, and performance
                 optimization.
               </p>
               <p>
-                <strong>Skills:</strong> AI, Machine Learning, Python, Java, React,
-                TypeScript, HTML/CSS, REST APIs, SQL databases, basic NoSQL, and
-                backend development.
+                <strong>Skills:</strong> AI, Machine Learning, Python, Java,
+                React, TypeScript, HTML/CSS, REST APIs, SQL databases, basic
+                NoSQL, and backend development.
               </p>
             </motion.div>
             <motion.div
@@ -319,7 +327,9 @@ const App: React.FC = () => {
             {['all', 'fullstack', 'frontend'].map((filter) => (
               <motion.button
                 key={filter}
-                className={`filter-btn ${activeFilter === filter ? 'active' : ''}`}
+                className={`filter-btn ${
+                  activeFilter === filter ? 'active' : ''
+                }`}
                 onClick={() =>
                   filterProjects(filter as 'all' | 'fullstack' | 'frontend')
                 }
@@ -334,84 +344,86 @@ const App: React.FC = () => {
           </div>
 
           <div className="projects-grid">
-            <AnimatePresence>
-              {filteredProjects.map((project) => (
-                <motion.div
-                  key={project.id}
-                  className="project-card"
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                  whileHover={{ y: -20, scale: 1.02 }}
-                  onHoverStart={() => {
-                    setHovered(true);
-                    setIsOnProject(true);
-                  }}
-                  onHoverEnd={() => {
-                    setHovered(false);
-                    setIsOnProject(false);
-                  }}
-                >
-                  <div className="project-image">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      loading="lazy"
-                    />
-                    <div className="project-overlay">
-                      <div className="project-links">
-                        <a
-                          href={project.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn btn-primary"
-                        >
-                          Live Demo
-                        </a>
-                        <a
-                          href={project.code}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn btn-outline"
-                        >
-                          View Code
-                        </a>
+            <AnimatePresence mode="sync">
+              <>
+                {filteredProjects.map((project) => (
+                  <motion.div
+                    key={project.id}
+                    className="project-card"
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4 }}
+                    whileHover={{ y: -20, scale: 1.02 }}
+                    onHoverStart={() => {
+                      setHovered(true);
+                      setIsOnProject(true);
+                    }}
+                    onHoverEnd={() => {
+                      setHovered(false);
+                      setIsOnProject(false);
+                    }}
+                  >
+                    <div className="project-image">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        loading="lazy"
+                      />
+                      <div className="project-overlay">
+                        <div className="project-links">
+                          <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn btn-primary"
+                          >
+                            Live Demo
+                          </a>
+                          <a
+                            href={project.code}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn btn-outline"
+                          >
+                            View Code
+                          </a>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="project-info">
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
+                    <div className="project-info">
+                      <h3>{project.title}</h3>
+                      <p>{project.description}</p>
 
-                    {project.snippet && (
-                      <div className="code-snippet">
-                        <SyntaxHighlighter
-                          language="typescript"
-                          style={oneDark}
-                          showLineNumbers
-                          customStyle={{
-                            borderRadius: '12px',
-                            fontSize: '0.8rem',
-                            maxHeight: '220px',
-                            marginTop: '1rem',
-                          }}
-                        >
-                          {project.snippet}
-                        </SyntaxHighlighter>
+                      {project.snippet && (
+                        <div className="code-snippet">
+                          <SyntaxHighlighter
+                            language="typescript"
+                            style={oneDark}
+                            showLineNumbers
+                            customStyle={{
+                              borderRadius: '12px',
+                              fontSize: '0.8rem',
+                              maxHeight: '220px',
+                              marginTop: '1rem',
+                            }}
+                          >
+                            {project.snippet}
+                          </SyntaxHighlighter>
+                        </div>
+                      )}
+
+                      <div className="project-tech">
+                        {project.tech.map((tech) => (
+                          <span key={tech} className="tech-tag">
+                            {tech}
+                          </span>
+                        ))}
                       </div>
-                    )}
-
-                    <div className="project-tech">
-                      {project.tech.map((tech) => (
-                        <span key={tech} className="tech-tag">
-                          {tech}
-                        </span>
-                      ))}
                     </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))}
+              </>
             </AnimatePresence>
           </div>
         </div>
@@ -471,8 +483,8 @@ const App: React.FC = () => {
       </section>
 
       {/* Scroll Top */}
-      <AnimatePresence>
-        {showScrollTop && (
+      <AnimatePresence mode="sync">
+        {showScrollTop ? (
           <motion.button
             className="scroll-top"
             onClick={() =>
@@ -485,7 +497,7 @@ const App: React.FC = () => {
           >
             <ArrowUp size={20} />
           </motion.button>
-        )}
+        ) : null}
       </AnimatePresence>
     </div>
   );
